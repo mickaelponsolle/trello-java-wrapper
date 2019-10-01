@@ -1,9 +1,6 @@
 package com.julienvey.trello.domain;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +17,10 @@ public class Card extends TrelloEntity {
     private Date due;
     private List<String> idMembers;
     private List<Label> labels;
+
+    @JsonIgnore
+    private List<String> idLabels;
+
     private Badges badges;
     private List<CardCheckItem> checkItemStates;
     private boolean closed;
@@ -237,10 +238,12 @@ public class Card extends TrelloEntity {
         }
         return output;
     }
-//
-//    public void setIdLabels(List<String> idLabels) {
-//        this.idLabels = idLabels;
-//    }
+
+    @JsonSetter(value = "idLabels")
+    public void setIdLabels(List<String> value){
+        idLabels = value;
+    }
+
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class CardCheckItem {
