@@ -2,3 +2,5 @@ target
 .classpath
 .project
 .settings
+/.idea/
+/trello-java-wrapper.iml
